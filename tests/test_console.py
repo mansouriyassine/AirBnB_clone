@@ -5,33 +5,72 @@ from unittest.mock import patch
 from console import HBNBCommand
 
 
-class TestConsole(unittest.TestCase):
-
-    def setUp(self):
-        """Set up test methods"""
-        pass
-
-    def tearDown(self):
-        """Clean up after tests"""
-        pass
+class TestHBNBCommand(unittest.TestCase):
 
     def test_quit(self):
-        """Test quit command"""
+        """Test the 'quit' command"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("quit")
-            self.assertEqual(f.getvalue().strip(), "")
+            self.assertEqual('', f.getvalue().strip())
+
+    def test_EOF(self):
+        """Test the 'EOF' command"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("EOF")
+            self.assertEqual('', f.getvalue().strip())
 
     def test_help(self):
-        """Test help command"""
+        """Test the 'help' command"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help")
-            self.assertTrue(len(f.getvalue().strip()) > 0)
+            output = f.getvalue().strip()
+            self.assertIn('Documented commands', output)
 
     def test_create(self):
-        """Test create command"""
+        """Test the 'create' command"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create BaseModel")
-            self.assertTrue(len(f.getvalue().strip()) > 0)
+            output = f.getvalue().strip()
+            self.assertIsNotNone(output)
+
+    def test_show(self):
+        """Test the 'show' command"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show BaseModel")
+            self.assertIn("** instance id missing **",
+                          f.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show BaseModel 12345")
+            self.assertIn("** no instance found **",
+                          f.getvalue().strip())
+
+    def test_all(self):
+        """Test the 'all' command"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all")
+            output = f.getvalue().strip()
+            self.assertTrue(isinstance(output, str))
+
+    def test_update(self):
+        """Test the 'update' command"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(
+                "update BaseModel 1234-1234-1234 email test@example.com")
+            self.assertIn("** no instance found **",
+                          f.getvalue().strip())
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update")
+            self.assertIn("** class name missing **",
+                          f.getvalue().strip())
+
+    def test_non_existing_command(self):
+        """Test for non-existing command"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("non_existing_command")
+            self.assertIn("*** Unknown syntax",
+                          f.getvalue().strip())
 
 
 if __name__ == "__main__":
