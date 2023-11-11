@@ -1,34 +1,34 @@
 #!/usr/bin/python3
-import json
-from models.base_model import BaseModel
+import uuid
+from datetime import datetime
+import models
 
 
-class FileStorage:
-    __file_path = "file.json"
-    __objects = {}
+class BaseModel:
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == '__class__':
+                    continue
+                elif key in ['created_at', 'updated_at']:
+                    setattr(self, key, datetime.fromisoformat(value))
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = self.updated_at = datetime.now()
+            models.storage.new(self)
 
-    def all(self):
-        return FileStorage.__objects
-
-    def new(self, obj):
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        FileStorage.__objects[key] = obj
+    def __str__(self):
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        obj_dict = {
-            key: obj.to_dict()
-            for key, obj in FileStorage.__objects.items()
-        }
-        with open(FileStorage.__file_path, 'w') as f:
-            json.dump(obj_dict, f)
+        self.updated_at = datetime.now()
+        models.storage.save()
 
-    def reload(self):
-        try:
-            with open(FileStorage.__file_path, 'r') as f:
-                obj_dict = json.load(f)
-            for key, value in obj_dict.items():
-                cls_name = value["__class__"]
-                del value["__class__"]
-                self.__objects[key] = eval(cls_name)(**value)
-        except FileNotFoundError:
-            pass
+    def to_dict(self):
+        dict_repr = self.__dict__.copy()
+        dict_repr['__class__'] = self.__class__.__name__
+        dict_repr['created_at'] = self.created_at.isoformat()
+        dict_repr['updated_at'] = self.updated_at.isoformat()
+        return dict_repr
