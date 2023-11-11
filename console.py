@@ -2,7 +2,6 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
-from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,23 +18,23 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        if arg not in ['BaseModel', 'User']:
+        if len(arg) == 0:
             print("** class name missing **")
             return
-
-        new_instance = None
-        if arg == "BaseModel":
-            new_instance = BaseModel()
-        elif arg == "User":
-            new_instance = User()
-
+        if arg != "BaseModel":
+            print("** class doesn't exist **")
+            return
+        new_instance = BaseModel()
         new_instance.save()
         print(new_instance.id)
 
     def do_show(self, arg):
         args = arg.split()
-        if len(args) == 0 or args[0] not in ['BaseModel', 'User']:
+        if len(args) == 0:
             print("** class name missing **")
+            return
+        if args[0] != "BaseModel":
+            print("** class doesn't exist **")
             return
         if len(args) < 2:
             print("** instance id missing **")
@@ -48,8 +47,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         args = arg.split()
-        if len(args) == 0 or args[0] not in ['BaseModel', 'User']:
+        if len(args) == 0:
             print("** class name missing **")
+            return
+        if args[0] != "BaseModel":
+            print("** class doesn't exist **")
             return
         if len(args) < 2:
             print("** instance id missing **")
@@ -63,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         args = arg.split()
-        if len(args) > 0 and args[0] not in ['BaseModel', 'User']:
+        if len(args) > 0 and args[0] != "BaseModel":
             print("** class doesn't exist **")
             return
         obj_list = [
@@ -74,8 +76,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         args = arg.split()
-        if len(args) == 0 or args[0] not in ['BaseModel', 'User']:
+        if len(args) == 0:
             print("** class name missing **")
+            return
+        if args[0] != "BaseModel":
+            print("** class doesn't exist **")
             return
         if len(args) < 2:
             print("** instance id missing **")
@@ -93,5 +98,6 @@ class HBNBCommand(cmd.Cmd):
         setattr(storage.all()[key], args[2], args[3])
         storage.all()[key].save()
 
-    if __name__ == '__main__':
-        HBNBCommand().cmdloop()
+
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
