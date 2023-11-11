@@ -1,10 +1,10 @@
-#!/usr/bin/python3
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 
+
 class TestBaseModel(unittest.TestCase):
-    
+
     def test_id_creation(self):
         """Test if id is created and its type"""
         model = BaseModel()
@@ -47,7 +47,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(model_dict["created_at"], str)
         self.assertIsInstance(model_dict["updated_at"], str)
 
-    # Add more tests as needed...
 
 if __name__ == "__main__":
     unittest.main()
