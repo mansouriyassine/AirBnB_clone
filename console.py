@@ -2,6 +2,7 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -18,22 +19,23 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        if len(arg) == 0:
-            print("** class name missing **")
+        if arg == "BaseModel":
+            obj = BaseModel()
+        elif arg == "User":
+            obj = User()
+        else:
+            print("** class doesn't exist **" if arg else
+                  "** class name missing **")
             return
-        if arg != "BaseModel":
-            print("** class doesn't exist **")
-            return
-        new_instance = BaseModel()
-        new_instance.save()
-        print(new_instance.id)
+        obj.save()
+        print(obj.id)
 
     def do_show(self, arg):
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
             return
-        if args[0] != "BaseModel":
+        if args[0] not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -50,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-        if args[0] != "BaseModel":
+        if args[0] not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -65,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         args = arg.split()
-        if len(args) > 0 and args[0] != "BaseModel":
+        if len(args) > 0 and args[0] not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
             return
         obj_list = [
@@ -76,21 +78,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         args = arg.split()
-        if len(args) == 0:
-            print("** class name missing **")
+        if len(args) < 3:
+            print("** class name missing **" if len(args) == 0 else
+                  "** instance id missing **" if len(args) == 1 else
+                  "** attribute name missing **")
             return
-        if args[0] != "BaseModel":
+        if args[0] not in ["BaseModel", "User"]:
             print("** class doesn't exist **")
-            return
-        if len(args) < 2:
-            print("** instance id missing **")
             return
         key = f"{args[0]}.{args[1]}"
         if key not in storage.all():
             print("** no instance found **")
-            return
-        if len(args) < 3:
-            print("** attribute name missing **")
             return
         if len(args) < 4:
             print("** value missing **")
