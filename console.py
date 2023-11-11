@@ -3,6 +3,11 @@ import cmd
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,27 +24,24 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        if arg == "BaseModel":
-            obj = BaseModel()
-        elif arg == "User":
-            obj = User()
+        if arg in ["BaseModel", "User", "Place", "State", "City", "Amenity",
+                   "Review"]:
+            obj = globals()[arg]()
+            obj.save()
+            print(obj.id)
         else:
             print("** class doesn't exist **" if arg else
                   "** class name missing **")
-            return
-        obj.save()
-        print(obj.id)
 
     def do_show(self, arg):
         args = arg.split()
-        if len(args) == 0:
-            print("** class name missing **")
-            return
-        if args[0] not in ["BaseModel", "User"]:
-            print("** class doesn't exist **")
-            return
         if len(args) < 2:
-            print("** instance id missing **")
+            print("** class name missing **" if not args else
+                  "** instance id missing **")
+            return
+        if args[0] not in ["BaseModel", "User", "Place", "State", "City",
+                           "Amenity", "Review"]:
+            print("** class doesn't exist **")
             return
         key = f"{args[0]}.{args[1]}"
         if key in storage.all():
@@ -49,14 +51,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         args = arg.split()
-        if len(args) == 0:
-            print("** class name missing **")
-            return
-        if args[0] not in ["BaseModel", "User"]:
-            print("** class doesn't exist **")
-            return
         if len(args) < 2:
-            print("** instance id missing **")
+            print("** class name missing **" if not args else
+                  "** instance id missing **")
+            return
+        if args[0] not in ["BaseModel", "User", "Place", "State", "City",
+                           "Amenity", "Review"]:
+            print("** class doesn't exist **")
             return
         key = f"{args[0]}.{args[1]}"
         if key in storage.all():
@@ -67,7 +68,9 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         args = arg.split()
-        if len(args) > 0 and args[0] not in ["BaseModel", "User"]:
+        if len(args) > 0 and args[0] not in ["BaseModel", "User", "Place",
+                                             "State", "City", "Amenity",
+                                             "Review"]:
             print("** class doesn't exist **")
             return
         obj_list = [
@@ -78,23 +81,23 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         args = arg.split()
-        if len(args) < 3:
+        if len(args) < 4:
             print("** class name missing **" if len(args) == 0 else
                   "** instance id missing **" if len(args) == 1 else
-                  "** attribute name missing **")
+                  "** attribute name missing **" if len(args) == 2 else
+                  "** value missing **")
             return
-        if args[0] not in ["BaseModel", "User"]:
+        if args[0] not in ["BaseModel", "User", "Place", "State", "City",
+                           "Amenity", "Review"]:
             print("** class doesn't exist **")
             return
         key = f"{args[0]}.{args[1]}"
         if key not in storage.all():
             print("** no instance found **")
             return
-        if len(args) < 4:
-            print("** value missing **")
-            return
-        setattr(storage.all()[key], args[2], args[3])
-        storage.all()[key].save()
+        obj = storage.all()[key]
+        setattr(obj, args[2], args[3])
+        obj.save()
 
 
 if __name__ == '__main__':
