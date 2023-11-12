@@ -1,52 +1,47 @@
-# AirBnB Clone Readme
+# AirBnB Clone Project README
 
 ## Description
-This console program emulates basic functionality of the AirBnB website, allowing users to manage object instances via a console interpreter. The AirBnB clone project implements a backend console for managing various objects, including:
+This repository contains the AirBnB clone project, an educational project to replicate the basic functionalities of AirBnB. 
+The project is part of the ALX SE curriculum, focusing on object-oriented programming, file storage, and a simple command-line interface.
 
-- BaseModel
-- User
-- State
-- City
-- Amenity
-- Place
-- Review
+## Features
+- A command-line console that allows data management (create, update, destroy, etc.) of various classes.
+- Storage of objects in a JSON file.
+- Classes include BaseModel, User, State, City, Amenity, Place, and Review.
 
-Object data is stored using JSON serialization and an abstracted storage engine.
+## Installation
+Clone this repository to your local machine:
+git clone https://github.com/mansouriyassine/AirBnB_clone.git
 
-## Console Usage
-To start the AirBnB clone console, run the following command in your terminal:
-
-\`\`\`bash
+## Usage
+To launch the console application, navigate to the project directory and run:
 ./console.py
-\`\`\`
 
-The console supports the following commands:
+## Console Commands
+- create: Creates a new instance of a class.
+- show: Shows an instance of a class based on its ID.
+- destroy: Deletes an instance based on the class name and ID.
+- all: Shows all instances of a class or all classes if no class name is provided.
+- update: Updates an instance based on the class name and ID by adding or updating an attribute.
+- quit or EOF: Exits the console.
 
-- \`create <class>\`: Creates a new instance of the given class.
-- \`show <class> <id>\`: Prints the object representation.
-- \`all\` or \`all <class>\`: Prints all objects or objects of a specific class.
-- \`destroy <class> <id>\`: Deletes an object.
-- \`update <class> <id>\`: Updates the attributes of an object.
-
-For more information on specific commands, you can type \`help\` or \`help <command>\` within the console.
-
-Example usage:
-
-\`\`\`bash
+## Examples
 (hbnb) create BaseModel
-01778a34-e02b-4dff-92a9-471f489d93db
-(hbnb) show BaseModel 01778a34-e02b-4dff-92a9-471f489d93db
-[BaseModel] (01778a34-e02b-4dff-92a9-471f489d93db) {'id': '01778a34-e02b-4dff-92a9-471f489d93db', 'created_at': datetime.datetime(2023, 2, 13, 14, 56, 12, 96959), 'updated_at': datetime.datetime(2023, 2, 13, 14, 56, 12, 96971)}
-(hbnb) destroy BaseModel 01778a34-e02b-4dff-92a9-471f489d93db
-(hbnb) all BaseModel
-[]
+(hbnb) show BaseModel 1234-1234-1234
+(hbnb) all
+(hbnb) update BaseModel 1234-1234-1234 email "test@example.com"
+(hbnb) quit
 
 ## Testing
-The console and classes are extensively tested using the \`unittest\` module. Tests for console functionality can be found in \`tests/test_console.py\`, and tests for each class are located in \`tests/test_<class>.py\`. To run all tests, navigate to the project root directory and execute the following command:
-
-\`\`\`bash
+Unit tests for the project are defined in the tests/ directory. To run the entire test suite, execute:
 python3 -m unittest discover tests
-\`\`\`
 
-This project prioritizes comprehensive testing of all its features to ensure reliability and correctness.
-EOF
+# Files and Directories
+- models/: Contains classes used for this project.
+- tests/: Contains all unit tests.
+- console.py: Entry point for the command-line console.
+- models/engine/: Storage engine, including file storage.
+
+# Authors
+Yassine Mansouri - https://github.com/mansouriyassine/
+Chidubem Uchendu - https://github.com/Dubemxe
