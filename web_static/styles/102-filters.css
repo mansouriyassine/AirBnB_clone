@@ -1,0 +1,9 @@
+.filters {
+    margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .filters {
+        margin: 10px 0;
+    }
+}
