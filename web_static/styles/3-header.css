@@ -3,24 +3,15 @@ header {
     height: 70px;
     width: 100%;
     border-bottom: 1px solid #CCCCCC;
-    position: relative;
-}
-
-.logo-container {
-    height: 100%;
-    padding-left: 20px;
-}
-
-.logo-container a {
-    display: inline-block;
-    height: 100%;
     display: flex;
     align-items: center;
 }
 
 .logo {
-    background: url('../images/logo.png') no-repeat center center;
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
     background-size: contain;
-    width: 50px; /* Adjust the size of your logo */
-    height: 100%;
+    height: 60px;
+    width: 150px;
+    margin-left: 20px;
 }

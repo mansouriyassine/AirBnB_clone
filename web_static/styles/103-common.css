@@ -1,5 +1,19 @@
-body {
-    font-size: 16px;
-    color: #333333;
-    background-color: #ffffff;
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Circular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #484848;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }

@@ -1,12 +1,21 @@
-body {
+body, html {
     margin: 0;
     padding: 0;
     font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     color: #484848;
+    box-sizing: border-box;
+    height: 100%;
 }
 
 .container {
     max-width: 1000px;
-    margin: 30px auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }

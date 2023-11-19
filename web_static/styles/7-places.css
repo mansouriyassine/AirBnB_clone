@@ -1,22 +1,31 @@
 .places {
-    /* Style for the places section */
+    margin-bottom: 20px;
 }
 
 .places h1 {
     font-size: 30px;
     text-align: left;
-    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
-article {
+.places article {
     width: 390px;
-    padding: 20px;
     margin: 20px;
+    padding: 1px;
     border: 1px solid #FF5A5F;
     border-radius: 4px;
-    text-align: center; /* Center the text horizontally */
+    display: inline-block;
+    vertical-align: top;
 }
 
-article h2 {
+.places h2 {
     font-size: 30px;
+    text-align: center;
 }
+
+.places article:last-child {
+    display: block;
+    margin-left: 250PX;
+    margin-right: auto;
+}
+

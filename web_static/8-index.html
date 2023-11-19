@@ -2,41 +2,125 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AirBnB Clone - More Details</title>
+    <link rel="icon" href="images/icon.png">
     <link rel="stylesheet" href="styles/4-common.css">
     <link rel="stylesheet" href="styles/3-header.css">
     <link rel="stylesheet" href="styles/3-footer.css">
     <link rel="stylesheet" href="styles/6-filters.css">
     <link rel="stylesheet" href="styles/8-places.css">
+    <title>AirBnB Clone - Web Static</title>
 </head>
 <body>
-    <header></header>
+    <header>
+        <div class="logo"></div>
+    </header>
+
     <div class="container">
         <section class="filters">
-            <!-- Filters content here (dropdowns, search button) -->
+            <div class="locations">
+                <h3>States</h3>
+                <h4>California, Arizona...</h4>
+                <ul class="popover">
+                    <li>
+                        <h2>Arizona:</h2>
+                            <li>Page</li>
+                            <li>Page2</li>
+                    <li>
+                        <h2>California:</h2>
+                            <li>San Francisco</li>
+                            <li>Los Altos</li>
+                </ul>
+            </div>
+            <div class="amenities">
+                <h3>Amenities</h3>
+                <h4>Internet, Kitchen...</h4>
+                <ul class="popover">
+                    <li>Internet</li>
+                    <li>TV</li>
+                    <li>Kitchen</li>
+                    <li>Iron</li>
+                </ul>
+            </div>
+            <button>Search</button>
         </section>
+
         <section class="places">
             <h1>Places</h1>
             <article>
                 <h2>My home</h2>
-                <div class="price_by_night">$100</div>
-                <div class="information">
-                    <div class="max_guest">4 guests</div>
-                    <div class="number_rooms">2 bedrooms</div>
-                    <div class="number_bathrooms">1 bathroom</div>
+              <div class="price_by_night">$80</div>
+              <div class="information">
+                <div class="max_guest">
+                  <div class="info_icon"></div>
+                  <p>2 Guests</p>
                 </div>
-                <div class="user">
-                    <b>Owner:</b> John Doe
+                <div class="number_rooms">
+                  <div class="info_icon"></div>
+                  <p>1 Bedroom</p>
                 </div>
-                <div class="description">
-                    This is a lovely place to stay.
+                <div class="number_bathrooms">
+                  <div class="info_icon"></div>
+                  <p>1 Bathroom</p>
                 </div>
+              </div>
+              <div class="user">
+                <p><b>Owner: </b>Alex Smith</p>
+              </div>
+              <div class="description">
+                <p>This is a lovely 1 bedroom and 1 bathroom apartment, with an amazing view...</p>
+              </div>
             </article>
-            <!-- More articles -->
-        </section>
-    </div>
-    <footer>Best School</footer>
-</body>
-</html>
+            <article>
+                <h2>Tiny house</h2>
+              <div class="price_by_night">$65</div>
+              <div class="information">
+                <div class="max_guest">
+                  <div class="info_icon"></div>
+                  <p>2 Guests</p>
+                </div>
+                <div class="number_rooms">
+                  <div class="info_icon"></div>
+                  <p>2 Bedrooms</p>
+                </div>
+                <div class="number_bathrooms">
+                  <div class="info_icon"></div>
+                  <p>1 Bathroom</p>
+                </div>
+              </div>
+              <div class="user">
+                <p><b>Owner: </b>Jamie Taylor</p>
+              </div>
+              <div class="description">
+                <p>Our place is a private, affordable stand-alone guest house...</p>
+              </div>
+            </article>
+            <article>
+                <h2>A suite</h2>
+              <div class="price_by_night">$90</div>
+              <div class="information">
+                <div class="max_guest">
+                  <div class="info_icon"></div>
+                  <p>4 Guests</p>
+                </div>
+                <div class="number_rooms">
+                  <div class="info_icon"></div>
+                  <p>3 Bedrooms</p>
+                </div>
+                <div class="number_bathrooms">
+                  <div class="info_icon"></div>
+                  <p>2 Bathrooms</p>
+                </div>
+              </div>
+              <div class="user">
+                <p><b>Owner: </b>Casey Jordan</p>
+              </div>
+              <div class="description">
+                <p>A luxurious suite with ocean views and modern amenities...</p>
+              </div>
+            </article>
+              </section>
+            </div>
+            <footer>Best School</footer>
+          </body>
+        </html>
